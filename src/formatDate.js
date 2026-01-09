@@ -18,14 +18,12 @@ function formatDate(date, fromFormat, toFormat) {
   }
 
   if ('YYYY' in supObj && toFormat.includes('YY')) {
-    supObj['YYYY'] = supObj['YYYY'].slice(-2);
-    supObj['YY'] = supObj['YYYY'];
+    supObj['YY'] = supObj['YYYY'].slice(-2);
   }
 
   if ('YY' in supObj && toFormat.includes('YYYY')) {
-    supObj['YY'] =
+    supObj['YYYY'] =
       +supObj['YY'] < 30 ? '20' + supObj['YY'] : '19' + supObj['YY'];
-    supObj['YYYY'] = supObj['YY'];
   }
 
   for (const key of toFormat) {
