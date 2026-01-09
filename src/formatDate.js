@@ -17,18 +17,17 @@ function formatDate(date, fromFormat, toFormat) {
     supObj[fromFormat[i]] = newDate[i];
   }
 
-  if ('YYYY' in supObj && toFormat.includes('YY')) {
-    supObj['YY'] = supObj['YYYY'].slice(-2);
-  }
-
-  if ('YY' in supObj && toFormat.includes('YYYY')) {
-    supObj['YYYY'] =
-      +supObj['YY'] < 30 ? '20' + supObj['YY'] : '19' + supObj['YY'];
-  }
-
   for (const key of toFormat) {
     if (key in supObj) {
       newArr.push(supObj[key]);
+    } else if (key === 'YYYY' && 'YY' in supObj) {
+      const yearNum = +supObj['YY'];
+      const newFormatYear =
+        yearNum < 30 ? '20' + supObj['YY'] : '19' + supObj['YY'];
+
+      newArr.push(newFormatYear);
+    } else if (key === 'YY' && 'YYYY' in supObj) {
+      newArr.push(supObj['YYYY'].slice(-2));
     }
   }
 
